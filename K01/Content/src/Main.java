@@ -6,11 +6,13 @@ public class Main {
     public static DropableObject[] objectList = {
             new DropableObject("Human(Normal)", 200, "H1"),
             new DropableObject("Human(Head Down)", 280, "H2"),
-            new DropableObject("Cat",97, "C")
+            new DropableObject("Cat",97, "C"),
+            new DropableObject("Suitcase", 800, "S")
     };
 
     public static void main(String[] args) {
         do {
+            sc = new Scanner(System.in);
             DropableObject chosenObject;
             System.out.println("Chose an Object you want to drop by the selector:");
             for (DropableObject o : objectList) {
@@ -26,8 +28,12 @@ public class Main {
                 case "h1":
                     chosenObject = objectList[0];
                     break;
+                case "s":
+                    chosenObject = objectList[3];
+                    break;
                 default:
                     chosenObject = objectList[0];
+                    System.exit(0);
             }
             System.out.println("Chosen Object: " + chosenObject.name);
             System.out.print("Enter a drop height you want(In m): ");
