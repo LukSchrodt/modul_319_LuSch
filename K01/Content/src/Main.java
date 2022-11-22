@@ -40,7 +40,8 @@ public class Main {
             double distance = sc.nextDouble();
             double dropSpeed = calculateDropSpeed(chosenObject.maxFallSpeed, distance);
             double dropTime = calculateDropTime(chosenObject.maxFallSpeed, distance);
-            System.out.println("Speed: " + dropSpeed + "\nTime: " + dropTime);
+            double timeTillMaxSpeed = calculateDropTimeTillMaxSpeed(chosenObject.maxFallSpeed, distance);
+            System.out.println("Speed(in m/s): " + dropSpeed + "\nTime(in s): " + dropTime + "\nTime till max speed(in s)" + timeTillMaxSpeed);
 
             System.out.println("\n\nPress q to quit or c to continue: ");
             sc = new Scanner(System.in);
@@ -76,5 +77,20 @@ public class Main {
             dropSpeed = dropTime*fallSpeed;
         }
         return dropTime;
+    }
+    public static double calculateDropTimeTillMaxSpeed(double maxFallSpeed, double distance){
+        double dropSpeed;
+        double dropTime;
+        double timeTillMaxSpeed = maxFallSpeed/fallSpeed;
+        double dropTimeWithNoLimit = Math.sqrt(distance/fallSpeed*2);
+        double distancePassedTillMaxSpeed = ((timeTillMaxSpeed*timeTillMaxSpeed)*fallSpeed*0.5);
+        if(dropTimeWithNoLimit > timeTillMaxSpeed){
+            dropTime = timeTillMaxSpeed + (distance-distancePassedTillMaxSpeed)/maxFallSpeed;
+            dropSpeed = maxFallSpeed;
+        }else {
+            dropTime = dropTimeWithNoLimit;
+            dropSpeed = dropTime*fallSpeed;
+        }
+        return timeTillMaxSpeed;
     }
 }
